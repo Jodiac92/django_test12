@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>삭제</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<form action="/board/deleteok" method="post">{%csrf_token%}
+  <input type="hidden" name="id" value="{{data.id}}" />
+  <table style="width: 50%" class="table">
+    <tr><th colspan="2" style="text-align: center;">삭제하려면 비밀번호를 입력하세요</th></tr>
+    <tr>
+	<td>passwd:</td>
+	<td><input type="password" name="del_passwd"></td>
+    </tr>
+    <tr>
+	<td><input type="submit" value="삭제"></td>
+	<td><input type="button" value="취소" onclick="javascript:history.back()"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

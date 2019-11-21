@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<h2>* 댓글 쓰기 *</h2>
+<form action="/board/replyok" method="post">{%csrf_token%}
+  <input type="hidden" name="id" value="{{data_one.id}}"/>
+  <input type="hidden" name="gnum" value="{{data_one.gnum}}"/>
+  <input type="hidden" name="onum" value="{{data_one.onum}}"/>
+  <input type="hidden" name="nested" value="{{data_one.nested}}"/>
+  <table style="width: 70%" class="table">
+	<tr>
+           <td>name:</td>
+           <td><input type="text" name="name"></td>
+        </tr>
+	<tr>
+           <td>passwd:</td>
+           <td><input type="password" name="passwd"></td>
+        </tr>
+	<tr>
+           <td>mail:</td>
+           <td><input type="text" name="mail"></td>
+        </tr>
+	<tr>
+	   <td>Title:</td>
+	   <td><input type="text" name="title" value="[RE]{{data_one.title}}" style="width:375px"></td>
+	</tr>
+	<tr>
+	   <td>cont:</td>
+	   <td><textarea name="cont" rows="5" cols="50"></textarea></td>
+	</tr>
+	<tr><td colspan="2"><input type="submit" value="작성 확인"></td></tr>
+  </table>
+</form>
+</body>
+</html>

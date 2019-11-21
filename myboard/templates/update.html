@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<h2>* 게시글 수정 *</h2>
+<form action="/board/updateok" method="post">{%csrf_token%}
+  <input type="hidden" name="id" value="{{data_one.id}}"/>
+  <table style="width: 70%" class="table">
+	<tr>
+		<td>name:</td>
+		<td><input type="text" name="name"value="{{data_one.name}}"></td>
+	</tr>
+	<tr>
+		<td>passwd:</td>
+		<td><input type="password" name="up_passwd"></td>
+	</tr>
+	<tr>
+		<td>mail:</td>
+		<td><input type="text" name="mail" value="{{data_one.mail}}"></td>
+	</tr>
+	<tr>
+		<td>Title:</td>
+		<td><input type="text" name="title" value="{{data_one.title}}"></td>
+	</tr>
+	<tr>
+		<td>cont:</td>
+		<td><textarea name="cont" rows="10" cols="50">{{data_one.cont}}</textarea></td>
+	</tr>
+	<tr><td colspan="2"><input type="submit" value="수정"></td></tr>
+  </table>
+</form>
+</body>
+</html>

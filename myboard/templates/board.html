@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>* 게시판 목록 *</h3>
+<a href="/board/insert">글쓰기</a><br>
+<table border="1">
+	<tr>
+		<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
+	</tr>
+	{% if data %}
+		{% for s in data %}
+			<tr>
+				<td>{{s.id}}</td>
+				<td>
+				{% with ''|center:s.nested as range %}
+					{% for _ in range %} <!-- _는 참조할 생각x -->
+						&nbsp;&nbsp;
+					{% endfor %}
+				{% endwith %}
+					<a href="/board/content?id={{s.id}}&page={{data.number}}">{{s.title}}</a>
+				</td>
+				<td>{{s.name}}</td>
+				<td>{{s.bdate}}</td>
+				<td>{{s.readcnt}}</td>
+			</tr>
+		{% endfor %}
+			<tr>   <!-- 페이징 처리 결과 -->
+				<td colspan="5" style="text-align: center;">
+					<div>
+					{% if data.has_previous %}
+						<a href="/board/list?page={{data.previous_page_number}}">&laquo;이전</a>{{data.number}} / {{data.paginator.num_pages}}
+					{% endif %}
+					{% if data.has_next %}
+						{{data.number}} / {{data.paginator.num_pages}}<a href="/board/list?page={{data.next_page_number}}">다음&raquo;</a>
+					{% endif %}
+					&nbsp;&nbsp;
+					<!-- {{data.number}} / {{data.paginator.num_pages}} 원래는 이거-->
+					</div>
+				</td>
+			</tr>
+	{% else %}
+		<tr>
+			<td colspan="5">글이 없어요</td>
+		</tr>
+	{% endif %}
+	<tr>
+		<td colspan="5" style="text-align: center;">
+			<form action="/board/search" method="post">{% csrf_token %}
+				<select name="s_type">
+					<option value="title" selected="selected">글제목</option>
+					<option value="name">작성자</option>
+				</select>
+				<input type="text" name="s_value">
+				<input type="submit" value="검색">
+			</form>
+		</td>
+	</tr>
+</table>
+
+<!-- with block template -->
+{% with list='1 2 3 4 5' %} <!-- 19~23 문법 -->
+	{% for num in list.split %}
+		{{num}}
+	{% endfor %}
+{% endwith %}
+<br>
+{% with '1 2 3 4 5' as range %}
+	{% for num in range %}
+		{{num}}
+	{% endfor %}
+{% endwith %}
+</body>
+</html>
