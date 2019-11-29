@@ -10,7 +10,7 @@ def Main(request):
 
 def ListFunc(request):
     #datas = BoardTab.objects.all().order_by('-id')
-    datas = BoardTab.objects.all().order_by('-gnum', 'onum')
+    datas = BoardTab.objects.all().order_by('-gnum', 'onum') # -gnum = ex)새 글이 첫 번 째로 보이기 함, onum = [RE]가 아래 있게 함
     #return render(request, 'board.html', {'data':datas})
     
     paginator = Paginator(datas, 5)  # 페이징 한 페이지에 5개
@@ -72,7 +72,7 @@ def UpdateFunc(request):
     return render(request, 'update.html', {'data_one':data})
 
 def UpdateOkFunc(request):
-    if request.method == 'POST':  # 안써주면 get,post를 모두 받을 수 있음
+    if request.method == 'POST':  # 안써주면 get,post를 모두 받을 수 있음 db에 알아서 저장됨
         upRec = BoardTab.objects.get(id = request.POST.get('id'))
         if upRec.passwd == request.POST.get('up_passwd'):
             upRec.name = request.POST.get('name')
